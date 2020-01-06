@@ -1,6 +1,6 @@
 # climate_v1_mac
 
-A new Flutter application.
+App to display the weather and climate change
 
 ## Getting Started
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:climate_v1_mac/screens/loading_screen.dart';
-
+import 'package:geolocator/geolocator.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
