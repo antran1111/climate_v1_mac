@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http; //as http, makes it easier to use package and not confuse names (get) with other methods
 import 'package:geolocator/geolocator.dart' ;
@@ -43,6 +45,24 @@ class _LoadingScreenState extends State<LoadingScreen> {
     //check for errors
     if (response.statusCode == 200) {
       String data = response.body;
+      var longitude = jsonDecode(data)['coord']['lon'];
+      print(longitude);
+      
+      var weatherDescription = jsonDecode(data)['weather'][0]['description'];
+      print(weatherDescription);
+
+
+
+      var weatherT = jsonDecode(data) ['main']['temp'];
+      print('Temperature: ' + weatherT.toString());
+
+      var weatherH = jsonDecode(data) ['main']['humidity'];
+      print('Humidity: $weatherH');
+
+      var weatherL = jsonDecode(data) ['name'];
+      print('Location: ' + weatherL);
+
+     // print(data);
     } else {
       print(response.statusCode);
     }
