@@ -53,13 +53,28 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
 
 
-      var weatherT = jsonDecode(data) ['main']['temp'];
+ /*     var weatherT = jsonDecode(data) ['main']['temp'];
       print('Temperature: ' + weatherT.toString());
 
       var weatherH = jsonDecode(data) ['main']['humidity'];
       print('Humidity: $weatherH');
 
       var weatherL = jsonDecode(data) ['name'];
+      print('Location: ' + weatherL);*/
+//this way is easier
+      //hoover over data, press control + j to find datatype, dynamic
+      //can go to json and change the variable types base on what you see
+ var decodedData = jsonDecode(data);
+      double weatherT = decodedData ['main']['temp'];
+      print('Temperature: ' + weatherT.toString());
+
+      int weatherC = decodedData['weather'][0]['id'];
+      print('Condition: $weatherC');
+
+      int weatherH = decodedData['main']['humidity'];
+      print('Humidity: $weatherH');
+
+      String weatherL = decodedData['name'];
       print('Location: ' + weatherL);
 
      // print(data);
