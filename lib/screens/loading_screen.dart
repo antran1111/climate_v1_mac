@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:climate_v1_mac/services/location.dart';
 import 'package:climate_v1_mac/services/networking.dart';
+import 'location_screen.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+
 
 const apiKey = "d4e56fccca9313967f79eb1b87191202";
 
@@ -30,6 +33,11 @@ class _LoadingScreenState extends State<LoadingScreen> {
 ;
     var weatherData = await networkHelper.getData();
 
+    Navigator.push(context, MaterialPageRoute(builder: (context)
+    {
+      return LocationScreen();
+    }));
+
 
   }
 
@@ -37,15 +45,14 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //make a loading indicator so people know something is happening in the background
+      //import flutter spin kit package
       body: Center(
-        child: RaisedButton(
-          onPressed: () {
-            //Get the current location
-            getLocationData();
-          },
-          child: Text('Get Location'),
+        child: SpinKitDoubleBounce(
+          color: Colors.white,
+          size: 100.0,
         ),
-      ),
+      )
     );
   }
 }
