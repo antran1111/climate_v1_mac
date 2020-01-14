@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:climate_v1_mac/utilities/constants.dart';
 
 class LocationScreen extends StatefulWidget {
+  //want to pass on locationWeather paramater from loading screen when initilize this
+  LocationScreen({this.locationWeather});
+
+  final locationWeather;
   @override
   _LocationScreenState createState() => _LocationScreenState();
 }
