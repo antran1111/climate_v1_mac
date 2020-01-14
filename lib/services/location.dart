@@ -17,3 +17,17 @@ class Location {
     }
   }
 }
+
+
+/*
+double weatherT = decodedData['main']['temp'];
+print('Temperature: ' + weatherT.toString());
+
+int weatherC = decodedData['weather'][0]['id'];
+print('Condition: $weatherC');
+
+int weatherH = decodedData['main']['humidity'];
+print('Humidity: $weatherH');
+
+String weatherL = decodedData['name'];
+print('Location: ' + weatherL);*/
