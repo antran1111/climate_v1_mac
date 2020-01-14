@@ -29,7 +29,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     longitude = (location.longitude);
 
     NetworkHelper networkHelper = NetworkHelper(
-        'https://samples.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey');
+        'https://samples.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey&units=metric');
     var weatherData = await networkHelper.getData();
 
     //move to new screen after downloading data
