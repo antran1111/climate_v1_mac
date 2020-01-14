@@ -28,7 +28,7 @@ condition = weatherData['weather'][0]['id'];
 //int weatherH = weatherData['main']['humidity']; //extra, might not use humidity
 cityName = weatherData['name'];
 
-print(temperature);
+print('temperature: $temperature');
 
   }
   @override

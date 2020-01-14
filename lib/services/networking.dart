@@ -13,12 +13,6 @@ class NetworkHelper {
 
     if (response.statusCode == 200) {
       String data = response.body;
-      var longitude = jsonDecode(data)['coord']['lon'];
-      print(longitude);
-
-      var weatherDescription = jsonDecode(data)['weather'][0]['description'];
-      print(weatherDescription);
-
       return jsonDecode(data);
       ;
     } else {
