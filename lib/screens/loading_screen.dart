@@ -31,9 +31,11 @@ class _LoadingScreenState extends State<LoadingScreen> {
     await location.getCurrentLocation();
 
     latitude = (location.latitude);
-    longitude = (location.longitude);
+    longitude = (location.longitude); //lat and long is a null thats why it's not working //try test on real device see if it works
+    print("latitude:" + latitude.toString());
+    print("longitude" + longitude.toString());
    // &units=metric //metric is not working
-    NetworkHelper networkHelper = NetworkHelper('$oldURL?lat=$latitude&lon=$longitude&appid=$apiKey');
+    NetworkHelper networkHelper = NetworkHelper('$openWeatherMapURL?lat=$latitude&lon=$longitude&appid=$apiKey');
     var weatherData = await networkHelper.getData();
 
     //move to new screen after downloading data
