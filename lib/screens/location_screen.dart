@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:climate_v1_mac/utilities/constants.dart';
+import 'package:climate_v1_mac/services/weather.dart';
 
 class LocationScreen extends StatefulWidget {
   //want to pass on locationWeather paramater from loading screen when initilize this
@@ -11,26 +12,40 @@ class LocationScreen extends StatefulWidget {
 }
 
 class _LocationScreenState extends State<LocationScreen> {
-
-  double temperature;
-  int condition;
+  WeatherModel weather = WeatherModel();
+  int temperature;
+  //int condition;
+  String weatherIcon;
   String cityName;
+  String weatherMessage;
 
   @override
   void initState() {
     super.initState();
-    updateUI(widget.locationWeather); //use print first to see if variables are returning correct values, then change it later to pass into updateUI
+    updateUI(widget
+        .locationWeather); //use print first to see if variables are returning correct values, then change it later to pass into updateUI
   }
 
   void updateUI(dynamic weatherData) {
-temperature = weatherData['main']['temp'];
-condition = weatherData['weather'][0]['id'];
+
+    //put everything in setState b/c it will change and be updated later
+
+    setState(() {
+
+      double temp = weatherData['main']['temp'];
+      temperature = temp.toInt();
+      var condition = weatherData['weather'][0]['id']; //condition will only exist based on weather
 //int weatherH = weatherData['main']['humidity']; //extra, might not use humidity
-cityName = weatherData['name'];
+      weatherIcon = weather.getWeatherIcon(condition);
+      cityName = weatherData['name'];
+      weatherMessage = weather.getMessage(temperature);
+    });
 
-print('temperature: $temperature');
 
+
+    print('temperature: $temperature');
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,11 +88,11 @@ print('temperature: $temperature');
                 child: Row(
                   children: <Widget>[
                     Text(
-                      '32°',
+                      '$temperature°',
                       style: kTempTextStyle,
                     ),
                     Text(
-                      '☀️',
+                      '$weatherIcon',
                       style: kConditionTextStyle,
                     ),
                   ],
@@ -86,7 +101,7 @@ print('temperature: $temperature');
               Padding(
                 padding: EdgeInsets.only(right: 15.0),
                 child: Text(
-                  "It's 🍦 time in San Francisco!",
+                  "$weatherMessage in $cityName!",
                   textAlign: TextAlign.right,
                   style: kMessageTextStyle,
                 ),

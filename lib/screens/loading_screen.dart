@@ -6,6 +6,11 @@ import 'location_screen.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 const apiKey = "d4e56fccca9313967f79eb1b87191202";
+//api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}
+//"https://samples.openweathermap.org/data/2.5/weather";
+//example : api.openweathermap.org/data/2.5/weather?lat=35&lon=139
+const openWeatherMapURL = "https://api.openweathermap.org/data/2.5/weather";
+const oldURL = "https://samples.openweathermap.org/data/2.5/weather";
 
 class LoadingScreen extends StatefulWidget {
   @override
@@ -28,8 +33,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     latitude = (location.latitude);
     longitude = (location.longitude);
    // &units=metric //metric is not working
-    NetworkHelper networkHelper = NetworkHelper(
-        'https://samples.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey');
+    NetworkHelper networkHelper = NetworkHelper('$oldURL?lat=$latitude&lon=$longitude&appid=$apiKey');
     var weatherData = await networkHelper.getData();
 
     //move to new screen after downloading data
