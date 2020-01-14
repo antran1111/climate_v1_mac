@@ -1,9 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http; //as http, makes it easier to use package and not confuse names (get) with other methods
-import 'package:geolocator/geolocator.dart' ;
+import 'package:http/http.dart'
+    as http; //as http, makes it easier to use package and not confuse names (get) with other methods
+import 'package:geolocator/geolocator.dart';
 import 'package:climate_v1_mac/services/location.dart';
+
+const apiKey = "d4e56fccca9313967f79eb1b87191202";
 
 class LoadingScreen extends StatefulWidget {
   @override
@@ -11,6 +14,8 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
+  double latitude;
+  double longitude;
   @override
   void initState() {
     super.initState();
@@ -22,8 +27,10 @@ class _LoadingScreenState extends State<LoadingScreen> {
     Location location = Location();
     await location.getCurrentLocation();
 
-    print(location.latitude);
-    print(location.longitude);
+    latitude = (location.latitude);
+    longitude = (location.longitude);
+
+    getData();
   }
 
   //getData method is from the http package
@@ -33,10 +40,11 @@ class _LoadingScreenState extends State<LoadingScreen> {
 }*/
 //turn getData into an async response
   void getData() async {
-    http.Response response = await http.get( //hold down cmd or windows and click on get, open up the get method from the http package file
-        'https://samples.openweathermap.org/data/2.5/weather?lat=35&lon=139&appid=b6907d289e10d714a6e88b30761fae22');
-  //  print(response.body); //where the data is stored
-   // print(response.statusCode);
+    http.Response response = await http.get(
+        //hold down cmd or windows and click on get, open up the get method from the http package file
+        'https://samples.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey');
+    //  print(response.body); //where the data is stored
+    // print(response.statusCode);
     //gives code 200. 200 means success, 404 is missing., 4xx is client error
     //5xx is server error
     //3xx is private
@@ -47,13 +55,11 @@ class _LoadingScreenState extends State<LoadingScreen> {
       String data = response.body;
       var longitude = jsonDecode(data)['coord']['lon'];
       print(longitude);
-      
+
       var weatherDescription = jsonDecode(data)['weather'][0]['description'];
       print(weatherDescription);
 
-
-
- /*     var weatherT = jsonDecode(data) ['main']['temp'];
+      /*     var weatherT = jsonDecode(data) ['main']['temp'];
       print('Temperature: ' + weatherT.toString());
 
       var weatherH = jsonDecode(data) ['main']['humidity'];
@@ -61,11 +67,11 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
       var weatherL = jsonDecode(data) ['name'];
       print('Location: ' + weatherL);*/
-//this way is easier
+//the way below is easier
       //hoover over data, press control + j to find datatype, dynamic
       //can go to json and change the variable types base on what you see
- var decodedData = jsonDecode(data);
-      double weatherT = decodedData ['main']['temp'];
+      var decodedData = jsonDecode(data);
+      double weatherT = decodedData['main']['temp'];
       print('Temperature: ' + weatherT.toString());
 
       int weatherC = decodedData['weather'][0]['id'];
@@ -77,7 +83,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
       String weatherL = decodedData['name'];
       print('Location: ' + weatherL);
 
-     // print(data);
+      // print(data);
     } else {
       print(response.statusCode);
     }
@@ -85,7 +91,6 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    getData();
     return Scaffold(
       body: Center(
         child: RaisedButton(
