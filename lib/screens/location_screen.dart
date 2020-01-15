@@ -24,13 +24,15 @@ class _LocationScreenState extends State<LocationScreen> {
     super.initState();
     updateUI(widget
         .locationWeather); //use print first to see if variables are returning correct values, then change it later to pass into updateUI
+ print(widget.locationWeather);
+
   }
 
   void updateUI(dynamic weatherData) {
 
     //put everything in setState b/c it will change and be updated later
-
-    setState(() {
+//[VERBOSE-2:ui_dart_state.cc(148)] Unhandled Exception: setState() or markNeedsBuild() called during build.
+    //setState(() {
 
       double temp = weatherData['main']['temp'];
       temperature = temp.toInt();
@@ -39,7 +41,7 @@ class _LocationScreenState extends State<LocationScreen> {
       weatherIcon = weather.getWeatherIcon(condition);
       cityName = weatherData['name'];
       weatherMessage = weather.getMessage(temperature);
-    });
+  //  });
 
 
 

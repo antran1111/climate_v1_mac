@@ -4,15 +4,10 @@ import 'package:climate_v1_mac/services/location.dart';
 import 'package:climate_v1_mac/services/networking.dart';
 import 'location_screen.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:climate_v1_mac/services/weather.dart';
-
 
 const apiKey = "d4e56fccca9313967f79eb1b87191202";
-//api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}
-//"https://samples.openweathermap.org/data/2.5/weather";
-//example : api.openweathermap.org/data/2.5/weather?lat=35&lon=139
-const openWeatherMapURL = "https://api.openweathermap.org/data/2.5/weather";
-const oldURL = "https://samples.openweathermap.org/data/2.5/weather";
+const openWeatherMapURL2 = "https://api.openweathermap.org/data/2.5/weather"; //this link doesn't work
+const openWeatherMapURL = "https://samples.openweathermap.org/data/2.5/weather";
 
 class LoadingScreen extends StatefulWidget {
   @override
@@ -20,9 +15,8 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
-  //double latitude;
-  //double longitude;
-
+  double latitude;
+  double longitude;
   @override
   void initState() {
     super.initState();
@@ -30,22 +24,15 @@ class _LoadingScreenState extends State<LoadingScreen> {
   }
 
   void getLocationData() async {
-
-    //WeatherModel weatherModel = WeatherModel();
-    //var weatherData = weatherModel.getLocationWeather(); //code above can be replaced with code below
-    var weatherData = WeatherModel().getLocationWeather();
-
-    /* moved everything here to weather.dart file
     Location location = Location();
     await location.getCurrentLocation();
 
     latitude = (location.latitude);
-    longitude = (location.longitude); //lat and long is a null thats why it's not working //try test on real device see if it works
-    print("latitude:" + latitude.toString());
-    print("longitude" + longitude.toString());
+    longitude = (location.longitude);
    // &units=metric //metric is not working
-    NetworkHelper networkHelper = NetworkHelper('$openWeatherMapURL?lat=$latitude&lon=$longitude&appid=$apiKey');
-    var weatherData = await networkHelper.getData();*/
+    NetworkHelper networkHelper = NetworkHelper(
+        '$openWeatherMapURL2?lat=$latitude&lon=$longitude&appid=$apiKey');
+    var weatherData = await networkHelper.getData();
 
     //move to new screen after downloading data
     //make sure to pass in parameters
