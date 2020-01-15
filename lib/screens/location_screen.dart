@@ -34,7 +34,7 @@ class _LocationScreenState extends State<LocationScreen> {
 //[VERBOSE-2:ui_dart_state.cc(148)] Unhandled Exception: setState() or markNeedsBuild() called during build.
     //setState(() {
 
-      double temp = weatherData['main']['temp'];
+      var temp = weatherData['main']['temp'];
       temperature = temp.toInt();
       var condition = weatherData['weather'][0]['id']; //condition will only exist based on weather
 //int weatherH = weatherData['main']['humidity']; //extra, might not use humidity
