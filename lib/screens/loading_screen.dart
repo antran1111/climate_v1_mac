@@ -4,6 +4,8 @@ import 'package:climate_v1_mac/services/location.dart';
 import 'package:climate_v1_mac/services/networking.dart';
 import 'location_screen.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:climate_v1_mac/services/weather.dart';
+
 
 const apiKey = "d4e56fccca9313967f79eb1b87191202";
 //api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}
@@ -18,8 +20,9 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
-  double latitude;
-  double longitude;
+  //double latitude;
+  //double longitude;
+
   @override
   void initState() {
     super.initState();
@@ -27,6 +30,12 @@ class _LoadingScreenState extends State<LoadingScreen> {
   }
 
   void getLocationData() async {
+
+    //WeatherModel weatherModel = WeatherModel();
+    //var weatherData = weatherModel.getLocationWeather(); //code above can be replaced with code below
+    var weatherData = WeatherModel().getLocationWeather();
+
+    /* moved everything here to weather.dart file
     Location location = Location();
     await location.getCurrentLocation();
 
@@ -36,7 +45,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     print("longitude" + longitude.toString());
    // &units=metric //metric is not working
     NetworkHelper networkHelper = NetworkHelper('$openWeatherMapURL?lat=$latitude&lon=$longitude&appid=$apiKey');
-    var weatherData = await networkHelper.getData();
+    var weatherData = await networkHelper.getData();*/
 
     //move to new screen after downloading data
     //make sure to pass in parameters
